@@ -13,7 +13,7 @@ from launch_ros.descriptions import ParameterValue
 def generate_launch_description():
     pkg_share = FindPackageShare(package='preliminary-simulation').find('preliminary-simulation')
     default_launch_dir = os.path.join(pkg_share, 'launch')
-    default_model_path = os.path.join(pkg_share, 'models/lleap_exo.urdf')
+    default_model_path = os.path.join(pkg_share, 'models/lleap_exo.urdf.xacro')
     robot_name_in_urdf = 'lleap_exo'
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
 
@@ -84,7 +84,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         parameters=[{'use_sim_time': use_sim_time, 
-        'robot_description': ParameterValue(Command(['xacro', model]), value_type=str)}],
+        'robot_description': ParameterValue(Command(['xacro ', model]), value_type=str)}],
         arguments=[default_model_path])
     
     # Launch RViz

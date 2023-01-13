@@ -94,7 +94,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link0}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link0}.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -103,7 +103,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link0}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link0}.STL" />
         </geometry>
       </collision>
     </link>
@@ -134,7 +134,7 @@
         <!-- y part of rpy determined by measuring angles in screenshot -->
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link1}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link1}.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -143,7 +143,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link1}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link1}.STL" />
         </geometry>
       </collision>
     </link>
@@ -173,7 +173,7 @@
         <!-- y part of rpy again from digital screenshot measurement -->
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link2}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link2}.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -182,7 +182,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link2}.STL" />
+          <mesh filename="package://${robot_name}_description/meshes/${link2}.STL" />
         </geometry>
       </collision>
     </link>
@@ -314,5 +314,4 @@
   - overall, just note which components (basic links and joints, transmissions, other gazebo
     components like intertials and plugins, macros, properties, etc)
   https://github.com/ros-industrial/universal_robot/blob/melodic-devel/ur_description/urdf/ur3.urdf.xacro
-
 -->
