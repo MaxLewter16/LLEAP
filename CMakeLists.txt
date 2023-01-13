@@ -11,7 +11,7 @@ find_package(ament_cmake REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 install(
-  DIRECTORY config launch maps meshes models params rviz src worlds
+  DIRECTORY launch meshes models rviz src 
   DESTINATION share/${PROJECT_NAME}
 )
 if(BUILD_TESTING)
