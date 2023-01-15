@@ -5,7 +5,8 @@ This repository is for the ROS2-based exoskeleton simulation developed by LLEAP,
 ## Prerequisites
 - ROS2 Humble
 - ros_control 
-- Gazebo Sim
+- joint_state_publisher 
+- Gazebo
 - A catkin workspace
 - git
 - A Github account connected to our group
@@ -19,17 +20,19 @@ The project is organized into a few different ROS packages that were reformatted
 * `src` Is currently experimental, containing an example node
 
 ## Downloading the project
-1. Launch a terminal window and navigate to the `src` folder of your catkin workspace.
+1. Ensure that you have a properly sourced catkin workspace (instructions can be found on the ROS2 Humble tutorial series). Navigate to the root folder of the catkin workspace.  
 
-2. To download this project (essentially all of its packages), type the following into the command line: 
+2. Launch a terminal window and navigate to the `src` folder of your catkin workspace.
+
+3. To download this project (essentially all of its packages), type the following into the command line: 
     ```
     git clone https://github.com/MaxLewter16/Preliminary-Simulation-ROS-2.git
     ```
-3. Back out of the `src` folder into the top level of your catkin workspace.
+4. Back out of the `src` folder into the top level of your catkin workspace.
     ```
     cd ..
     ```
-4. Build the package (i.e. make it runnable) by typing the following into terminal:
+5. Build the package (i.e. make it runnable) by typing the following into terminal:
     ```
     colcon_build
     ```
@@ -46,6 +49,12 @@ The project is organized into a few different ROS packages that were reformatted
     ```
 2. In the same terminal window, type (Note: Should have tab auto-fill):
     ```
-    roslaunch launch preliminary_exo.launch.py
+    ros2 launch preliminary-simulation preliminary_exo.launch.py
     ```
     After a few seconds, the model should open in RVIZ.
+
+3. If this does not work, in your root folder, try:
+    '''
+    source install/setup.bash
+    '''
+    and then repeat step 2
