@@ -4,6 +4,7 @@ This repository is for the ROS2-based exoskeleton simulation developed by LLEAP,
 
 ## Prerequisites
 - ROS2 Humble
+- ROS2 Humble-xacro
 - ros_control 
 - joint_state_publisher 
 - Gazebo
