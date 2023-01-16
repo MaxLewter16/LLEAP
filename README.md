@@ -35,18 +35,18 @@ The project is organized into a few different ROS packages that were reformatted
     ```
 5. Build the package (i.e. make it runnable) by typing the following into terminal:
     ```
-    colcon_build
+    colcon build
     ```
-    The `lleap_exo_XXX` packages should now be ready and runnable.  
+    The `preliminary-simulation` package should now be ready and runnable.  
 
     You can control the simulation through the terminal or with `rqt`.
   
 
 ## Controlling the simulation through the terminal
 
-1. Launch a terminal window and navigate to your catkin workspace. Once there, type:
+1. Launch a terminal window and navigate to your ros2_ws workspace. Once there, type:
     ```
-    source devel/setup.bash
+    source install/setup.bash
     ```
 2. In the same terminal window, type (Note: Should have tab auto-fill):
     ```
