@@ -54,8 +54,8 @@ The project is organized into a few different ROS packages that were reformatted
     ```
     After a few seconds, the model should open in RVIZ.
 
-3. If this does not work, in your root folder, try:
+3. If this does not work, in your root folder, using the source code and repeating step two:
     '''
     source install/setup.bash
     '''
-    and then repeat step 2
+
