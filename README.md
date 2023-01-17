@@ -60,3 +60,36 @@ The project is organized into a few different ROS packages that were reformatted
     ```
     Repeat step 2. 
 
+## GAZEBO IMPLEMENTATION
+
+The changes made to start Gazebo were the following:
+- updated the path directories to the link meshes (ROS2 does not use package:// format anymore??)
+- RVIZ disabled to save GPU usage while gazebo runs
+- edited the base_link origin so that the model does not spawn underground
+
+Current Status:
+- model spawns in Gazebo, feet collide with ground properly
+- launch file has no references to Gazebo, Gazebo is currently launched in the command line
+
+To do:
+- update the launch file to launch Gazebo (maybe make a new launch file so that one starts RVIZ and the other starts Gazebo)
+- Implement moveit2 and roscontrol(?) in order to send move commands to the hip and knee joints
+- Simplify collisional meshes
+
+
+## Launching Gazebo
+Assuming the workspace is prepared, use the following instructions to launch Gazebo
+1) Open a new terminal and run the launch file with the following command:
+    ```
+    ros2 launch preliminary-simulation preliminary_exo.launch.py
+    ```
+2) Open a new terminal, and enter the following to initialize a basic Gazebo World:
+    ```
+    ros2 launch gazebo_ros gazebo.launch.py world:=src/robot_testing/worlds/world6.world
+
+    ```
+3) Open another new terminal, and enter the following to spawn the exoskeleton. Note: Gazebo may say it is crashing, let it run and it usually will load
+    ```
+    ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity robot1
+
+    ```
