@@ -1,6 +1,7 @@
-# Author: Max Lewter
-# Date: November 10, 2022
-# Description: Launch a basic mobile robot URDF file using Rviz.
+# Author: Max Lewter and Jonathan Ilagan
+# Date: January 16, 2022
+# Description: Launch exoskeleton in Gazebo or RVIZ
+
 import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
@@ -62,9 +63,9 @@ def generate_launch_description():
         description='Use simulation gazebo clock if true'
     )
 
-     # Specify the actions
+    # Initializing Nodes
  
-    # Publish the joint state values for the non-fixed joints in the URDF file.
+    #Publish the joint state values for the non-fixed joints in the URDF file.
     start_joint_state_publisher_cmd = Node(
         condition=UnlessCondition(gui),
         package='joint_state_publisher',
@@ -88,30 +89,29 @@ def generate_launch_description():
         arguments=[default_model_path])
     
     # Launch RViz
-    start_rviz_cmd = Node(
-        condition=IfCondition(use_rviz),
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        output='screen',
-        arguments=['-d', rviz_config_file])
+    # start_rviz_cmd = Node(
+    #     condition=IfCondition(use_rviz),
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     name='rviz2',
+    #     output='screen',
+    #     arguments=['-d', rviz_config_file])
     
      # Create the launch description and populate
     ld = LaunchDescription()
     
     # Declare the launch options
     ld.add_action(declare_model_path_cmd)
-    ld.add_action(declare_rviz_config_file_cmd)
+    # ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_joint_state_publisher_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)  
-    ld.add_action(declare_use_rviz_cmd) 
+    # ld.add_action(declare_use_rviz_cmd) 
     ld.add_action(declare_use_sim_time_cmd)
     
     # Add any actions
-    ld.add_action(start_joint_state_publisher_cmd)
     ld.add_action(start_joint_state_publisher_gui_node)
     ld.add_action(start_robot_state_publisher_cmd)
-    ld.add_action(start_rviz_cmd)
+    # ld.add_action(start_rviz_cmd) 
     
     return ld
 
