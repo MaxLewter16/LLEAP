@@ -40,7 +40,7 @@
 
   <!-- secure (fix) model in Gazebo: world <> link0 = fixed base_link = torso -->
   <joint name="global_fixed" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 ${pi}" />
+    <origin xyz="0 0 1" rpy="0 0 ${pi}" /> <!--changed z component so robot isnt stuck in ground -->
     <parent link="world"/>
     <child link="base_link"/>
   </joint>
@@ -49,7 +49,7 @@
   <!-- torso: base for the model; attached to world in gazebo if whole model fixed -->
   <link name="base_link">
     <visual>
-      <origin xyz="0 0 0.5" rpy="0 0 0" />
+      <origin xyz="0 0 0.5" rpy="0 0 0" /> 
       <!-- TODO: don't forget to add torso mass (and whole intertial element) here once have an estimate! -->
       <mass value="0" />
       <geometry>
@@ -94,7 +94,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link0}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/hip_base.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -103,7 +103,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link0}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/hip_base.STL" />
         </geometry>
       </collision>
     </link>
@@ -131,10 +131,10 @@
         <inertia ixx="0.00167557501769417" ixy="-8.47541360240001E-06" ixz="-0.00126944670009916" iyy="0.00777922506609577" iyz="-2.94088009595002E-06" izz="0.00736726690967362" />
       </inertial>
       <visual>
-        <!-- y part of rpy determined by measuring angles in screenshot -->
+        <!-- y part of rpy determined by measuring angles in screenshot --> 
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link1}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/thigh.STL" /> 
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -143,7 +143,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link1}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/thigh.STL" />
         </geometry>
       </collision>
     </link>
@@ -173,7 +173,7 @@
         <!-- y part of rpy again from digital screenshot measurement -->
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link2}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/shank.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -182,7 +182,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="package://preliminary-simulation/meshes/${link2}.STL" />
+          <mesh filename="$(find preliminary-simulation)/meshes/shank.STL" />
         </geometry>
       </collision>
     </link>
