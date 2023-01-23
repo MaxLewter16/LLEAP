@@ -13,6 +13,7 @@
 
   <!-- Grab the joint limits. -->
   <xacro:include filename="lleap_exo_joint_limits.urdf.xacro" />
+  <xacro:include filename="gazebo_sim.xacro"
 
   <!-- link names; 1-3 map to .STL filenames -->
   <xacro:property name="link0" value="hip_base" />  <!-- stationary inner part of hip joint -->
@@ -74,7 +75,7 @@
       via the normal revolute joint currently attaching the thigh to the fixed hip_base.
       i.e., in future, the hip_base should not exist (simple geometry model) or be included
       in the base_link torso component (if more complicated goemetry is needed). -->
-    <joint name="${prefix}_${joint0}_fixed_joint" type="fixed">
+    <joint name="$hip_fixed_joint" type="fixed">
       <origin xyz="0.00012638 ${reflect * torso_width/2} -0.0003763" rpy="0 0 0" />
       <parent link="base_link"/>
       <child link="${prefix}_${link0}"/>
@@ -85,7 +86,7 @@
     <!-- link0 should be the fixed hip base component.
           This exists only bc of the way current .STL models are.
           See above joint0 comment for future work. -->
-    <link name="${prefix}_${link0}">
+    <link name="$link_0">
       <inertial>
         <origin xyz="-0.0281418142029674 0.084195220690108 0.0136945077855137" rpy="0 0 0" />
         <mass value="1.40107341049644" />
@@ -94,7 +95,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/hip_base.STL" />
+          <mesh filename="package://preliminary-simulation/meshes/hip_base.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -103,13 +104,13 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/hip_base.STL" />
+          <mesh filename="package://preliminary-simulation/meshes/hip_base.STL" />
         </geometry>
       </collision>
     </link>
 
     <!-- hip joint: fixed hip base to thigh (link1) -->
-    <joint name="${prefix}_${joint1}_revolute_joint" type="revolute">
+    <joint name="$hip_revolute_joint" type="revolute">
       <!-- rpy (contrary to understanding), rotates red, blue, green which would be xzy, even though rpy = xyz.
             Theoretical rotation correspondance and order: https://answers.ros.org/question/114776/what-does-therpy-in-urdf-file-means/ -->
       <origin xyz="0.00012638 0.043454 -0.0003763" rpy="${pi / 2} ${pi / 2} ${pi}" />
@@ -123,7 +124,7 @@
 
     <!-- link1 should be the thigh (joint1 to joint2).
           In our current STL model, contains the parts of the hip and knee joint visuals. -->
-    <link name="${prefix}_${link1}">
+    <link name="$link_1">
       <inertial>
         <origin xyz="-0.404990833485201 0.00723950792302919 -0.0848264671155734" 
                 rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
@@ -134,7 +135,7 @@
         <!-- y part of rpy determined by measuring angles in screenshot --> 
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/thigh.STL" /> 
+          <mesh filename="package://preliminary-simulation/meshes/thigh.STL" /> 
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -143,13 +144,13 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 12) * pi / 180}" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/thigh.STL" />
+          <mesh filename="package://preliminary-simulation/meshes/thigh.STL" />
         </geometry>
       </collision>
     </link>
 
     <!-- knee joint: thigh (link1) to shank (link2)-->
-    <joint name="${prefix}_${joint2}_revolute_joint" type="revolute">
+    <joint name="$knee_revolute_joint" type="revolute">
       <!--<origin xyz="-0.63585 0.033681 -0.13506" rpy="0 0 0" />-->
       <origin xyz="0.649 0.001 0.03402" rpy="0 0 0" />
       <parent link="${prefix}_${link1}" />
@@ -162,7 +163,7 @@
 
     <!-- link2 should be the shank (joint2 to joint3).
           In our current STL model, contains part of the knee joint visual. -->
-    <link name="${prefix}_${link2}">
+    <link name="$link_2">
       <inertial>
         <origin xyz="-0.210873385399549 -0.0276710830621445 -0.140982468689507" 
                 rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
@@ -173,7 +174,7 @@
         <!-- y part of rpy again from digital screenshot measurement -->
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/shank.STL" />
+          <mesh filename="package://preliminary-simulation/meshes/shank.STL" />
         </geometry>
         <material name="">
           <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
@@ -182,7 +183,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="${pi / 2} 0 ${-(180 - 34) * pi / 180}" />
         <geometry>
-          <mesh filename="$(find preliminary-simulation)/meshes/shank.STL" />
+          <mesh filename="package://preliminary-simulation/meshes/shank.STL" />
         </geometry>
       </collision>
     </link>
@@ -190,7 +191,7 @@
     <!-- ADDING FOOT -->
 
     <!-- ankle joint: shank (link2) to foot ('link3') -->
-    <joint name="${prefix}_${joint3}_revolute_joint" type="revolute">
+    <joint name="$foot_revolute_joint" type="revolute">
       <origin xyz="${0.475 + 0.075} 0.003 -0.03" rpy="0 0 0" />
       <!-- TODO: once make simplified collisional geometries (dimensions based on SolidWorks models > ask design team), use those known dimensions to place the ankle joint origin at the bottom of the shank. Then use similar math (foot box dimensions) to place the foot link origin relative to the ankle joint origin. -->
       <parent link="${prefix}_${link2}" />
@@ -202,7 +203,7 @@
     </joint>
 
     <!-- link3 should be the foot. -->
-    <link name="${prefix}_${link3}">
+    <link name="$link_3">
       <inertial>
         <!-- TODO: probably need to change this interial element -->
         <!-- not quite sure what this is <origin xyz="-0.210873385399549 -0.0276710830621445 -0.140982468689507" rpy="0 0 0" /> -->
@@ -227,47 +228,6 @@
     </link>
   </xacro:macro>
 
-    <!-- Required Gazebo components (transmissions) for all joints. -->
-    <!-- hip 
-    <transmission name="${prefix}_${joint1}_trans">   
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_${joint1}_revolute_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_${joint1}_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-    -->
-
-    <!-- knee 
-    <transmission name="${prefix}_${joint2}_trans">   
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_${joint2}_revolute_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_${joint2}_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-    -->
-
-     <!-- ankle 
-    <transmission name="${prefix}_${joint3}_trans">  
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}_${joint3}_revolute_joint">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="${prefix}_${joint3}_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
-    -->
-
-  
   <!-- is this even necessary? </xacro:macro> -->
 
 
@@ -276,42 +236,5 @@
   <xacro:leg prefix="left" reflect="-1" />
 
 
-  <!-- Needed gazebo_ros_control plugin. 
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-  
-  -->
-      <!-- If not specified, the namespace defaults to the parent directory of this file. -->
-      <!-- <robotNamespace>/${robot_name}</robotNamespace> -->
-      <!-- Don't need to explicitly specify the *default* RobotHWSim, but left here to remind you can change it.
-            This default only really provides hardware_interface::EffortJointInterface as the option for the 
-            "output type" of joint controllers for ros_control. This is why they're currently specified as
-            effort_controllers/XXX in the .yaml files, meaning the hardware_interface write() command (implemented 
-            in this Default) send effort commands to the simulator. If we want to use position_controllers (i.e. 
-            output position commands to the low-level motor control), we will have to implement our own RobotHWSim 
-            with custom read() and write() functions that interface with Gazebo, much like how we will have to 
-            write our own real RobotHW to read and write to physical microcontrollers. -->
-      <!-- 
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-    </plugin>
-  </gazebo>
-  -->
 </robot>
 
-
-<!--
-  TODO: consider reorganizing a bit to be more modularly structured like the UR robot arm URDFs.
-  Don't need to be as modular bc only one robot (i.e., not ur3, ur5, etc) and less complex so far,
-    but good to keep some things in mind as reference -> potential future changes to our model.
-  - transmissions in separate file; macro for one leg's transmissions, prefix (usual) and 
-      hw_interface as marco params
-  - see the xacro:insert_clock use in the _robot. files
-    https://answers.ros.org/question/358472/xacro-insert_block-parameter/
-    any use for us?
-  - also see creation and use of the xacro macro cylinder intertial.
-    if we build our simple geom model as cylinders (looking like the UR arms tbh), can use something 
-      similar to calc/create inertial blocks?
-  - overall, just note which components (basic links and joints, transmissions, other gazebo
-    components like intertials and plugins, macros, properties, etc)
-  https://github.com/ros-industrial/universal_robot/blob/melodic-devel/ur_description/urdf/ur3.urdf.xacro
--->
