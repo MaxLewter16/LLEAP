@@ -28,10 +28,10 @@ def generate_launch_description():
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory('ros_ign_gazebo'), 'launch'), '/ign_gazebo.launch.py']),
+            get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
         )
  
-    spawn_entity = Node(package='ros_ign_gazebo', executable='create',
+    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                     arguments=['-topic', 'robot_description',
                                 '-entity', 'my_bot'],
                     output='screen')
