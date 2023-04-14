@@ -15,7 +15,7 @@ def generate_launch_description():
     launch_pkg_share = FindPackageShare(package='exo_rviz').find('exo_rviz')
     default_model_path = os.path.join(pkg_share, 'urdf/lleap_exo.urdf.xacro')
     robot_name_in_urdf = 'exo'
-    default_rviz_config_path = os.path.join(launch_pkg_share, 'rviz/urdf_config.rviz')
+    default_rviz_config_path = os.path.join(launch_pkg_share, 'rviz/exo.rviz')
 
     #Launch Config variables specific to simulation
     gui = LaunchConfiguration('gui')
