@@ -85,6 +85,7 @@ To view the legs in Rviz2 run:
 ```bash
 ros2 launch exo_viz preliminary_exo.launch.py
 ```
+<img width="1552" alt="rviz" src="https://user-images.githubusercontent.com/35123887/231926841-e22c5501-2011-4126-aabd-e4de87ed1d29.png">
 
 ### exo_gazebo
 Loads configuration files and runs the simulation software for the legs using gazebo classic and will eventually work in parallel with the 
@@ -101,6 +102,7 @@ To open moveit2 in Rviz2 run:
 ```bash 
 ros2 launch exo_moveit demo.launch.py
 ```
+<img width="1552" alt="moveit" src="https://user-images.githubusercontent.com/35123887/231926854-d6bccb13-d69b-4d00-bb28-f94bbf0185bf.png">
 
 ## License
 This software is licensed under the BSD-3-Clause license found in the LICENSE file in the root directory of this source tree.
