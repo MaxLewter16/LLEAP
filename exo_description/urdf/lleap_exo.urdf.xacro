@@ -12,7 +12,7 @@
   <xacro:property name="robot_name" value="exo" />
 
   <!-- Grab the joint limits. -->
-  <xacro:include filename="$(find exo_description)/urdf/lleap_exo_joint_limits.urdf.xacro" />
+  <xacro:include filename="$(find exo_description)/urdf/lleap_exo_joint_limits.xacro" />
   <xacro:include filename="$(find exo_description)/urdf/exo_material_colors.xacro"/>
 
   <!-- link names; 1-3 map to .STL filenames -->
