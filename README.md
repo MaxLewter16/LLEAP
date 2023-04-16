@@ -94,6 +94,7 @@ To view the legs in Gazebo classic run:
 ```bash
 ros2 launch exo_gazebo gazebo.launch.py
 ```
+<img width="1552" alt="Screen Shot 2023-04-16 at 12 47 10 AM" src="https://user-images.githubusercontent.com/35123887/232345292-4a579eb0-d3f4-4067-bbc3-fe6b7ccbae59.png">
 
 ### exo_moveit
 After following the source installation of moveit2 you should be able to run the motion planning in Rviz2.
