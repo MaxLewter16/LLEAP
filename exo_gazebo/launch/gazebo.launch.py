@@ -1,5 +1,5 @@
 import os
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python import get_package_prefix, get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -7,15 +7,20 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import xacro
  
- 
-def generate_launch_description():
-    # Specify the name of the package and path to xacro file within the package
-    pkg_name = 'preliminary-simulation'
-    file_subpath = 'models/lleap_exo.urdf.xacro'
+# Specify the name of the package and path to xacro file within the package
+pkg_name = 'preliminary-simulation'
+urdf_subpath = 'models/lleap_exo.urdf.xacro'
 
+def generate_launch_description():
     # Use xacro to process the file
-    xacro_file = os.path.join(get_package_share_directory(pkg_name),file_subpath)
+    xacro_file = os.path.join(get_package_share_directory(pkg_name), urdf_subpath)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
+
+    pkg_share_path = os.pathsep + os.path.join(get_package_prefix(pkg_name), 'share')
+    if 'GAZEBO_MODEL_PATH' in os.environ:
+        os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
+    else:
+        os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
 
     # Configure the node
     node_robot_state_publisher = Node(
@@ -23,7 +28,7 @@ def generate_launch_description():
         executable='robot_state_publisher',
         output='screen',
         parameters=[{'robot_description': robot_description_raw,
-        'use_sim_time': True}] # add other parameters here if required
+        'use_sim_time': True}]
     )
 
     gazebo = IncludeLaunchDescription(
