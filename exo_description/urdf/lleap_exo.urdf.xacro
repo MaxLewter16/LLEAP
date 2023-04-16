@@ -12,7 +12,7 @@
   <xacro:property name="robot_name" value="exo" />
 
   <!-- Grab the joint limits. -->
-  <xacro:include filename="lleap_exo_joint_limits.urdf.xacro" />
+  <xacro:include filename="$(find exo_description)/urdf/lleap_exo_joint_limits.xacro" />
   <xacro:include filename="$(find exo_description)/urdf/exo_material_colors.xacro"/>
 
   <!-- link names; 1-3 map to .STL filenames -->
@@ -41,7 +41,7 @@
 
   <!-- secure (fix) model in Gazebo: world <> link0 = fixed base_link = torso -->
   <joint name="global_fixed" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 ${pi}" />
+    <origin xyz="0 0 1" rpy="0 0 ${pi}" />
     <parent link="world"/>
     <child link="base_link"/>
   </joint>
@@ -222,6 +222,27 @@
   <xacro:leg prefix="right" reflect="1" />
   <xacro:leg prefix="left" reflect="-1" />
 
+  <xacro:include filename="$(find preliminary-simulation)/models/lleap_exo_gazebo.xacro" />
+  <!-- Needed gazebo_ros_control plugin. 
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+  
+  -->
+      <!-- If not specified, the namespace defaults to the parent directory of this file. -->
+      <!-- <robotNamespace>/${robot_name}</robotNamespace> -->
+      <!-- Don't need to explicitly specify the *default* RobotHWSim, but left here to remind you can change it.
+            This default only really provides hardware_interface::EffortJointInterface as the option for the 
+            "output type" of joint controllers for ros_control. This is why they're currently specified as
+            effort_controllers/XXX in the .yaml files, meaning the hardware_interface write() command (implemented 
+            in this Default) send effort commands to the simulator. If we want to use position_controllers (i.e. 
+            output position commands to the low-level motor control), we will have to implement our own RobotHWSim 
+            with custom read() and write() functions that interface with Gazebo, much like how we will have to 
+            write our own real RobotHW to read and write to physical microcontrollers. -->
+      <!-- 
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  -->
 </robot>
 
 
