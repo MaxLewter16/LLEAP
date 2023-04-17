@@ -3,3 +3,6 @@ install/
 build/
 log/
 logs/
+
+# VSCode files
+.vscode
