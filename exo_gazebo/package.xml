@@ -2,10 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>exo_gazebo</name>
-  <version>1.0.0</version>
+  <version>0.1.0</version>
   <description>Run simulated robot through gazebo.</description>
-  <maintainer email="kylequinlan09@gmail.com">kylequinlan</maintainer>
   <maintainer email="lewtermax@gmail.com">mlewt</maintainer>
+  <maintainer email="kylequinlan09@gmail.com">Kyle Quinlan</maintainer>
   <license>BSD-3-Clause</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
