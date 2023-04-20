@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>moveit2_simulation</name>
+  <name>exo_moveit</name>
   <version>0.3.0</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the lleap_exo with the MoveIt Motion Planning Framework
