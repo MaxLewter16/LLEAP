@@ -3,7 +3,7 @@
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
 
     <!-- Import lleap_exo urdf file -->
-    <xacro:include filename="$(find preliminary-simulation)/models/lleap_exo.urdf.xacro" />
+    <xacro:include filename="$(find exo_description)/urdf/lleap_exo.urdf.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="lleap_exo.ros2_control.xacro" />

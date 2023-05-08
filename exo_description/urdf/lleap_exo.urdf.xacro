@@ -222,7 +222,7 @@
   <xacro:leg prefix="right" reflect="1" />
   <xacro:leg prefix="left" reflect="-1" />
 
-  <xacro:include filename="$(find preliminary-simulation)/models/lleap_exo_gazebo.xacro" />
+  <xacro:include filename="$(find exo_description)/urdf/lleap_exo_gazebo.xacro" />
   <!-- Needed gazebo_ros_control plugin. 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

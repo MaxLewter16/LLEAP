@@ -1,7 +1,7 @@
 moveit_setup_assistant_config:
   urdf:
-    package: preliminary-simulation
-    relative_path: models/lleap_exo.urdf.xacro
+    package: exo_description
+    relative_path: urdf/lleap_exo.urdf.xacro
   srdf:
     relative_path: config/lleap_exo.srdf
   package_settings:
