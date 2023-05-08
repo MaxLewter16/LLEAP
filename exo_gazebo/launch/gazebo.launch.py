@@ -8,15 +8,15 @@ from launch_ros.actions import Node
 import xacro
  
 # Specify the name of the package and path to xacro file within the package
-pkg_name = 'preliminary-simulation'
-urdf_subpath = 'models/lleap_exo.urdf.xacro'
+description_pkg_name = 'exo_description'
+urdf_subpath = 'urdf/lleap_exo.urdf.xacro'
 
 def generate_launch_description():
     # Use xacro to process the file
-    xacro_file = os.path.join(get_package_share_directory(pkg_name), urdf_subpath)
+    xacro_file = os.path.join(get_package_share_directory(description_pkg_name), urdf_subpath)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
 
-    pkg_share_path = os.pathsep + os.path.join(get_package_prefix(pkg_name), 'share')
+    pkg_share_path = os.pathsep + os.path.join(get_package_prefix(description_pkg_name), 'share')
     if 'GAZEBO_MODEL_PATH' in os.environ:
         os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
     else:
