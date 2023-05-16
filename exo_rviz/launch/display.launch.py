@@ -64,22 +64,23 @@ def generate_launch_description():
 
      # Specify the actions
  
+ 
     # Publish the joint state values for the non-fixed joints in the URDF file.
-    start_joint_state_publisher_cmd = Node(
+    joint_state_publisher_cmd = Node(
         condition=UnlessCondition(gui),
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher')
     
     # A GUI to manipulate the joint state values
-    start_joint_state_publisher_gui_node = Node(
+    joint_state_publisher_gui_node = Node(
         condition=IfCondition(gui),
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
         name='joint_state_publisher_gui')
     
     # Subscribe to the joint states of the robot, and publish the 3D pose of each link.
-    start_robot_state_publisher_cmd = Node(
+    robot_state_publisher_cmd = Node(
         condition=IfCondition(use_robot_state_pub),
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -88,13 +89,14 @@ def generate_launch_description():
         arguments=[default_model_path])
     
     # Launch RViz
-    start_rviz_cmd = Node(
+    rviz = Node(
         condition=IfCondition(use_rviz),
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config_file])
+        arguments=['-d', rviz_config_file],
+        parameters=[{'use_sim_time': True}])
     
      # Create the launch description and populate
     ld = LaunchDescription()
@@ -108,10 +110,10 @@ def generate_launch_description():
     ld.add_action(declare_use_sim_time_cmd)
     
     # Add any actions
-    ld.add_action(start_joint_state_publisher_cmd)
-    ld.add_action(start_joint_state_publisher_gui_node)
-    ld.add_action(start_robot_state_publisher_cmd)
-    ld.add_action(start_rviz_cmd)
+    ld.add_action(joint_state_publisher_cmd)
+    ld.add_action(joint_state_publisher_gui_node)
+    ld.add_action(robot_state_publisher_cmd)
+    ld.add_action(rviz)
     
     return ld
 
