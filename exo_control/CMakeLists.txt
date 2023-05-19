@@ -8,6 +8,29 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(ros2_control REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(controller_manager REQUIRED)
+
+# install c++ executables
+include_directories(include)
+add_executable(hw_interface src/exo_hw_interface.cpp)
+add_executable(ros2_control src/ros2_control_node.cpp)
+ament_target_dependencies(ros2_control rclcpp controller_manager)
+
+install(TARGETS
+  hw_interface
+  ros2_control
+  DESTINATION lib/${PORJECT_NAME})
+
+ament_python_install_package(${PROJECT_NAME})
+
+install(PROGRAMS
+  ${PROJECT_NAME}/bluetoothesp32.py
+  ${PROJECT_NAME}/bluetoothscanner.py
+  ${PROJECT_NAME}/serialesp32.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
