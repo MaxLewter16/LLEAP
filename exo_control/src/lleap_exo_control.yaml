@@ -1,0 +1,45 @@
+# puts nested info in the namespace 'lleap_exo'; see also the 'ns' attribute of 
+#   <rosparam> and <node>, as well as the 'args' attribute of the controller manager node
+lleap_exo:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Right Group Position Controller ---------------------------------------
+  right_joint_group_position_controller:
+    type: effort_controllers/JointGroupPositionController
+    joints:
+      - right_hip_revolute_joint
+      - right_knee_revolute_joint
+
+    # PID gains for each joint; have to write down here to get in correct namespace; need to load grp controller
+    right_hip_revolute_joint:
+      pid: {p: 900.0, i: 0.01, d: 100.0}
+    right_knee_revolute_joint:
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+  # Left Group Position Controller ---------------------------------------
+  left_joint_group_position_controller:
+    type: effort_controllers/JointGroupPositionController
+    joints:
+      - left_hip_revolute_joint
+      - left_knee_revolute_joint
+
+    # PID gains for each joint; have to write down here to get in correct namespace; need to load grp controller
+    left_hip_revolute_joint:
+      pid: {p: 900.0, i: 0.01, d: 100.0}
+    left_knee_revolute_joint:
+      pid: {p: 100.0, i: 0.01, d: 10.0}
+
+  
+  
+  # hip_revolute_joint_position_controller:
+  #  type: effort_controllers/JointPositionController
+  # joint: hip_revolute_joint
+  #  pid: {p: 900.0, i: 0.01, d: 100.0}
+  # knee_revolute_joint_position_controller:
+  #  type: effort_controllers/JointPositionController
+  #  joint: knee_revolute_joint
+  #  pid: {p: 100.0, i: 0.01, d: 10.0}
