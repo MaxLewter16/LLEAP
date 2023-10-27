@@ -78,11 +78,11 @@ The packages should be ready and runnable.
 
 ## Usage - Simulation
 
-### exo_viz
+### exo_rviz
 Loads configuration files and runs the visualization software for the legs using Rviz2 
 To view the legs in Rviz2 run:
 ```bash
-ros2 launch exo_viz preliminary_exo.launch.py
+ros2 launch exo_rviz display.launch.py
 ```
 <img width="1552" alt="rviz" src="https://user-images.githubusercontent.com/35123887/231926841-e22c5501-2011-4126-aabd-e4de87ed1d29.png">
 
