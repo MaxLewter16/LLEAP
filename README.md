@@ -13,7 +13,7 @@ These are the packages needed to control the legs, visualize it in [rviz2](https
 - `exo_gazebo` loads configuration files and runs the simulation software for the legs using gazebo classic and will eventually work in parallel with 
 the control code.
 - `exo_moveit` runs the manipulation and motion planning software for how to get from one point to another in 3d space.
-- `exo_viz` loads configuration files and runs the visualization software for the legs using rviz2 
+- `exo_rviz` loads configuration files and runs the visualization software for the legs using rviz2 
 
 For more details see below.
 
@@ -50,9 +50,7 @@ Create or use an existing catkin workspace:
 
 ```bash
 mkdir -p ~/ros2_ws/src
-cd ~/ros2
-catkin init
-cd src
+cd ~/ros2/src
 ```
 
 ### Cloning the project
@@ -63,10 +61,11 @@ To clone this project (essentially all of its packages), type the following into
 git clone https://github.com/MaxLewter16/LLEAP.git
 ```
 
-Back out of the `src` folder into the top level of your Catkin workspace and build the packages.
+Back out of the `src` folder, install all dependencies, and build.
 
 ```bash
 cd ..
+rosdep install -i --from-path src --rosdistro humble -y
 colcon build
 ```
 
