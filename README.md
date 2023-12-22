@@ -36,7 +36,7 @@ For serial communication with USB connected hardware devices:
 
 - [`pyserial`](https://pypi.org/project/pyserial/)
 
-## Installation
+## Local Installation
 
 ### Create and configure a workspace
 
@@ -75,6 +75,19 @@ source install/setup.bash
 ```
 
 The packages should be ready and runnable.
+
+## Docker Development Installation
+Not recommended but needed for mac developers. First, create a ros2 ws and clone the project like above. 
+Use the [graphical docker interface](https://github.com/Tiryoh/docker-ros2-desktop-vnc) for visual development. 
+```bash
+docker run --name ros2_container -p 6080:80 --security-opt seccomp=unconfined -v [ABSOLUTE_PATH]:/home/ubuntu/ros2_ws --shm-size=512m tiryoh/ros2-desktop-vnc:humble
+```
+Browse http://127.0.0.1:6080/.
+
+You can access the container remotely using vscode with the docker extension and you can use git locally. To start the container again use:
+```bash
+docker start ros2_container
+```
 
 ## Usage - Simulation
 
