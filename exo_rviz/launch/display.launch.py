@@ -13,9 +13,10 @@ from launch_ros.descriptions import ParameterValue
 def generate_launch_description():
     pkg_share = FindPackageShare(package='exo_description').find('exo_description')
     launch_pkg_share = FindPackageShare(package='exo_rviz').find('exo_rviz')
-    default_model_path = os.path.join(pkg_share, 'urdf/lleap_exo.urdf.xacro')
+    model = os.path.join(pkg_share, 'urdf/lleap_exo.urdf.xacro')
     robot_name_in_urdf = 'exo'
-    default_rviz_config_path = os.path.join(launch_pkg_share, 'rviz/exo.rviz')
+    rviz_config = os.path.join(launch_pkg_share, 'rviz/exo.rviz')
+    use_sim_time = True
  
     # Publish the joint state values for the non-fixed joints in the URDF file.
     jsp = Node(
@@ -35,7 +36,7 @@ def generate_launch_description():
         executable='robot_state_publisher',
         parameters=[{'use_sim_time': use_sim_time, 
         'robot_description': ParameterValue(Command(['xacro ', model]), value_type=str)}],
-        arguments=[default_model_path])
+        arguments=[model])
     
     # Launch RViz
     rviz = Node(
@@ -43,7 +44,7 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config_file],
+        arguments=['-d', rviz_config],
         parameters=[{'use_sim_time': True}])
     
     return LaunchDescription([
