@@ -8,7 +8,23 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)  
 find_package(ament_cmake_python REQUIRED)
-find_package(ros2_control REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED)
+find_package(rclcpp REQUIRED)
+
+
+add_executable(exo_control src/ros2_moveit.cpp)
+target_include_directories(exo_control PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+target_compile_features(exo_control PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+ament_target_dependencies(
+  exo_control
+  "moveit_ros_planning_interface"
+  "rclcpp"
+)
+
+install(TARGETS exo_control
+  DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 

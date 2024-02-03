@@ -1,0 +1,17 @@
+version: '3'
+services:
+  ros2_container:
+    image: 
+    container_name: ros2_container
+    volumes:
+      - /path/to/your/ros2/environment:/path/in/container
+    ports:
+      - "5900:5900"  # Example port for VNC, adjust as needed
+    environment:
+      - DISPLAY=:1  # Example setting for VNC, adjust as needed
+    command: ["your_ros2_start_command"]  # Replace with the actual command to start your ROS2 environment
+    security_opt:
+      - seccomp=unconfined
+    shm_size: 512m
+    ports:
+      - "6080:80"
